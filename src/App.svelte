@@ -9,8 +9,25 @@
 
 	const tabChange = (e)=>{
 		activeItem=e.detail;
-	}
+	};
 
+
+	let polls = [
+		{
+			id:1,
+			question: 'Python or JavaScript',
+			answerA: 'Python',
+			answerB: 'JavaScript',
+			votesA: 9,
+			votesB: 15,
+		},
+	]
+
+	const handleAdd=(e)=>{
+		const poll = e.detail;
+		polls = [poll, ...polls];
+		console.log(polls);
+	}
 </script>
 
 
@@ -20,7 +37,7 @@
 	{#if activeItem==='Current Polls'}
 		<p>Poll List Component Goes here</p>
 	{:else if activeItem==='Add New Poll'}
-		<CreatePollForm/>
+		<CreatePollForm on:add={handleAdd}/>
 	{/if}
 </main>
 <Footer/>
