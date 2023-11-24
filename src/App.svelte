@@ -12,6 +12,22 @@
 		activeItem=e.detail;
 	};
 
+	const handleVote = (e)=>{
+		const{id,option} = e.detail;
+
+		let copiedPolls = [...polls];
+		let votedPoll = copiedPolls.find((poll)=> poll.id == id);
+
+		if (option ==='a'){
+			votedPoll.votesA++;
+		}
+		if (option ==='b'){
+			votedPoll.votesB++;
+		}
+
+		polls = copiedPolls;
+	}
+
 
 	let polls = [
 		{
@@ -37,7 +53,7 @@
 <main>
 	<Tabs {activeItem} {items} on:tabChange={tabChange}/>
 	{#if activeItem==='Current Polls'}
-		<PollList {polls}/>
+		<PollList {polls} on:vote={handleVote}/>
 	{:else if activeItem==='Add New Poll'}
 		<CreatePollForm on:add={handleAdd}/>
 	{/if}
